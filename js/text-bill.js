@@ -29,7 +29,7 @@ function textBillTotal(){
     smsTotalElem.innerHTML = textsmsTotal.toFixed(2);
     var texttotalCost = textcallsTotal + textsmsTotal;
     totalCostElem.innerHTML = texttotalCost.toFixed(2);
-
+   
     totalCostElem.classList.remove("danger");
     totalCostElem.classList.remove("warning");
 

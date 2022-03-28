@@ -31,6 +31,18 @@ function calculateBtnClicked(){
     //round to two decimals
     var roundedBillTotal = billTotal.toFixed(2);
     billTotalElement.innerHTML = roundedBillTotal;
+
+    billTotalElement.classList.remove("danger");
+    billTotalElement.classList.remove("warning");
+
+    //color the total based on the criteria
+    if ( roundedBillTotal >= 50){
+        // adding the danger class will make the text red
+        billTotalElement.classList.add("danger");
+    }
+    else if ( roundedBillTotal >= 30){
+        billTotalElement.classList.add("warning");
+    }
 }
 
 //link the function to a click event on the calculate button

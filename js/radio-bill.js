@@ -1,5 +1,4 @@
-// get a reference to the sms or call radio buttons
-var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
+
 //get a reference to the add button
 const textradioBillAddBtn = document.querySelector(".radioBillAddBtn");
 
@@ -13,6 +12,8 @@ var radiCallsTotal = 0;
 var radiSmsTotal = 0;
 //add an event listener for when the add button is pressed
 function radiBillTotal() {
+    // get a reference to the sms or call radio buttons
+    var checkedRadioBtn = document.querySelector("input[name='billItemType']:checked");
     // get the value entered in the billType radiobtn checked
     if (checkedRadioBtn) {
         var billTypeEntered = checkedRadioBtn.value;
