@@ -11,34 +11,40 @@ const totalCostElem = document.querySelector(".totalOne");
 //create a variable that will keep track of the total bill
 var textcallsTotal = 0;
 var textsmsTotal = 0;
+var texttotalCost = 0;
 
 //add an event listener for when the add button is pressed
-function textBillTotal(){
+function textBillTotal() {
     // get the value entered in the billType textfield
     var billTypeEntered = billTypeText.value.trim();
     // update the correct total
-    if (billTypeEntered === "call"){
-        textcallsTotal += 2.75
+    if (texttotalCost < 50) {
+        if (billTypeEntered === "call") {
+            textcallsTotal += 2.75
+        }
+        else if (billTypeEntered === "sms") {
+            textsmsTotal += 0.75;
+        }
     }
-    else if (billTypeEntered === "sms"){
-        textsmsTotal += 0.75;
-    }
-    
+    else
+        alert("You have reached the critical level")
+
+
     //update the totals that is displayed on the screen.
     callsTotalElem.innerHTML = textcallsTotal.toFixed(2);
     smsTotalElem.innerHTML = textsmsTotal.toFixed(2);
-    var texttotalCost = textcallsTotal + textsmsTotal;
+    texttotalCost = textcallsTotal + textsmsTotal;
     totalCostElem.innerHTML = texttotalCost.toFixed(2);
-   
+
     totalCostElem.classList.remove("danger");
     totalCostElem.classList.remove("warning");
 
     //color the total based on the criteria
-    if (texttotalCost >= 30){
+    if (texttotalCost >= 50) {
         // adding the danger class will make the text red
         totalCostElem.classList.add("danger");
     }
-    else if (texttotalCost >= 20){
+    else if (texttotalCost >= 30) {
         totalCostElem.classList.add("warning");
     }
 }

@@ -10,6 +10,7 @@ const totalCostElement = document.querySelector(".totalTwo");
 //create a variable that will keep track of the total bill
 var radiCallsTotal = 0;
 var radiSmsTotal = 0;
+var radiTotalCost = 0;
 //add an event listener for when the add button is pressed
 function radiBillTotal() {
     // get a reference to the sms or call radio buttons
@@ -18,18 +19,22 @@ function radiBillTotal() {
     if (checkedRadioBtn) {
         var billTypeEntered = checkedRadioBtn.value;
         // update the correct total
-        if (billTypeEntered === "call") {
-            radiCallsTotal += 2.75
+        if (radiTotalCost < 50) {
+            if (billTypeEntered === "call") {
+                radiCallsTotal += 2.75
+            }
+            else if (billTypeEntered === "sms") {
+                radiSmsTotal += 0.75;
+            }
         }
-        else if (billTypeEntered === "sms") {
-            radiSmsTotal += 0.75;
-        }
+        else
+            alert("You have reached the critical level")
     }
 
     //update the totals that is displayed on the screen.
     callsTotalElement.innerHTML = radiCallsTotal.toFixed(2);
     smsTotalElement.innerHTML = radiSmsTotal.toFixed(2);
-    var radiTotalCost = radiCallsTotal + radiSmsTotal;
+    radiTotalCost = radiCallsTotal + radiSmsTotal;
     totalCostElement.innerHTML = radiTotalCost.toFixed(2);
 
     totalCostElement.classList.remove("danger");

@@ -15,6 +15,7 @@ var criticalLevel = 0;
 // create a variables that will keep track of all three totals.
 var callsTotal = 0;
 var smsTotal = 0;
+var totalCost = 0;
 //add an event listener for when the 'Update settings' button is pressed
 function updateCosts() {
     const callCostSetting = document.querySelector(".callCostSetting");
@@ -39,45 +40,33 @@ function setBillTotal() {
     if (checkedRadBtn) {
         var setbillTypeEntered = checkedRadBtn.value;
         // update the correct total
-        if (setbillTypeEntered === "call") {
-            if (callCost === 0)
-                callsTotal += 2.75;
-            else
+        if (totalCost < criticalLevel) {
+            if (setbillTypeEntered === "call") {
                 callsTotal += parseFloat(callCost);
-        }
-        else if (setbillTypeEntered === "sms") {
-            if (smsCost === 0)
-                smsTotal += 0.75;
-            else
+            }
+            else if (setbillTypeEntered === "sms") {
                 smsTotal += parseFloat(smsCost);
+            }
         }
+        else
+            alert("You have reached the critical level")
+
     }
 
     //update the totals that is displayed on the screen.
     callsTotalSet.innerHTML = callsTotal.toFixed(2);
     smsTotalSet.innerHTML = smsTotal.toFixed(2);
-    var totalCost = callsTotal + smsTotal;
+    totalCost = callsTotal + smsTotal;
     totalCostSet.innerHTML = totalCost.toFixed(2);
 
     //color the total based on the criteria
-    
+
     totalCostSet.classList.remove("danger");
     totalCostSet.classList.remove("warning");
-    if(criticalLevel < warningLevel)
-    {
-        alert("warning level cannot be less than critical level");
+    if (criticalLevel < warningLevel) {
+        alert("warning level cannot be greater than critical level");
     }
-    if (criticalLevel === 0 && warningLevel === 0) {
-        // adding the danger class will make the text red
-        if (totalCost >= 50) {
-            // adding the danger class will make the text red
-            totalCostSet.classList.add("danger");
-        }
-        else if (totalCost >= 30) {
-            totalCostSet.classList.add("warning");
-        }
-    }
-    else if (criticalLevel !== 0 & warningLevel === 0) {
+    if (criticalLevel !== 0 & warningLevel === 0) {
         if (totalCost >= criticalLevel) {
             totalCostSet.classList.add("danger");
         }
@@ -88,7 +77,6 @@ function setBillTotal() {
         }
     }
     else {
-       
         if (totalCost >= warningLevel && totalCost < criticalLevel) {
             totalCostSet.classList.add("warning");
         }
