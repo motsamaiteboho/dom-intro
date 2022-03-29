@@ -23,19 +23,25 @@ function updateCosts() {
     const smsCostSetting = document.querySelector(".smsCostSetting");
     const warningLevelSetting = document.querySelector(".warningLevelSetting");
     const criticalLevelSetting = document.querySelector(".criticalLevelSetting");
-    
     if (smsCostSetting.value !== "")
         smsCost = smsCostSetting.value;
     if (callCostSetting.value !== "")
         callCost = callCostSetting.value;
-    if (warningLevelSetting.value !== "")
+    if (warningLevelSetting.value !== "") {
+        if (warningLevel !== warningLevelSetting.value) {
+            totalCostSet.classList.remove("danger");
+            totalCostSet.classList.remove("warning");
+        }
         warningLevel = warningLevelSetting.value;
-    if (criticalLevelSetting.value !== "")
-        criticalLevel = criticalLevelSetting.value;
-        
-    totalCostSet.classList.remove("danger");
-    totalCostSet.classList.remove("warning");
+    }
+    if (criticalLevelSetting.value !== "") {
 
+        if (criticalLevelSetting.value > criticalLevel && criticalLevel !== 0) {
+            if(totalCostSet.classList.contains("danger"))
+                totalCostSet.classList.add("warning");
+        }
+        criticalLevel = criticalLevelSetting.value;
+    }
 }
 updateSettings.addEventListener('click', updateCosts);
 //add an event listener for when the add button is pressed
@@ -54,8 +60,12 @@ function setBillTotal() {
                 smsTotal += parseFloat(smsCost);
             }
         }
-        else
-            alert("You have reached the critical level")
+        else {
+            if (criticalLevel < warningLevel)
+                alert("warning level cannot be greater than critical level");
+            else
+                alert("You have reached the critical level")
+        }
 
     }
 
@@ -69,9 +79,7 @@ function setBillTotal() {
 
     totalCostSet.classList.remove("danger");
     totalCostSet.classList.remove("warning");
-    if (criticalLevel < warningLevel) {
-        alert("warning level cannot be greater than critical level");
-    }
+
     if (criticalLevel !== 0 & warningLevel === 0) {
         if (totalCost >= criticalLevel) {
             totalCostSet.classList.add("danger");
