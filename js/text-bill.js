@@ -34,11 +34,11 @@ function textBillTotal(){
     totalCostElem.classList.remove("warning");
 
     //color the total based on the criteria
-    if (texttotalCost >= 50){
+    if (texttotalCost >= 30){
         // adding the danger class will make the text red
         totalCostElem.classList.add("danger");
     }
-    else if (texttotalCost >= 30){
+    else if (texttotalCost >= 20){
         totalCostElem.classList.add("warning");
     }
 }
