@@ -17,11 +17,13 @@ var callsTotal = 0;
 var smsTotal = 0;
 var totalCost = 0;
 //add an event listener for when the 'Update settings' button is pressed
+
 function updateCosts() {
     const callCostSetting = document.querySelector(".callCostSetting");
     const smsCostSetting = document.querySelector(".smsCostSetting");
     const warningLevelSetting = document.querySelector(".warningLevelSetting");
     const criticalLevelSetting = document.querySelector(".criticalLevelSetting");
+    
     if (smsCostSetting.value !== "")
         smsCost = smsCostSetting.value;
     if (callCostSetting.value !== "")
@@ -30,6 +32,10 @@ function updateCosts() {
         warningLevel = warningLevelSetting.value;
     if (criticalLevelSetting.value !== "")
         criticalLevel = criticalLevelSetting.value;
+        
+    totalCostSet.classList.remove("danger");
+    totalCostSet.classList.remove("warning");
+
 }
 updateSettings.addEventListener('click', updateCosts);
 //add an event listener for when the add button is pressed
