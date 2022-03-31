@@ -29,15 +29,23 @@ function updateCosts() {
         callCost = callCostSetting.value;
     if (warningLevelSetting.value !== "") {
         if (warningLevel !== warningLevelSetting.value) {
-            totalCostSet.classList.remove("danger");
-            totalCostSet.classList.remove("warning");
+            if (totalCost == warningLevelSetting.value) {
+                if(totalCostSet.classList.contains("danger"));
+                    totalCostSet.classList.add("warning");
+            }
+            else {
+                totalCostSet.classList.remove("danger");
+                totalCostSet.classList.remove("warning");
+            }
+
         }
         warningLevel = warningLevelSetting.value;
+
     }
     if (criticalLevelSetting.value !== "") {
 
         if (criticalLevelSetting.value > criticalLevel && criticalLevel !== 0) {
-            if(totalCostSet.classList.contains("danger"))
+            if (totalCostSet.classList.contains("danger"))
                 totalCostSet.classList.add("warning");
         }
         criticalLevel = criticalLevelSetting.value;
@@ -79,6 +87,9 @@ function setBillTotal() {
 
     totalCostSet.classList.remove("danger");
     totalCostSet.classList.remove("warning");
+    if (warningLevel === totalCost) {
+        totalCostSet.classList.add("warning");
+    }
 
     if (criticalLevel !== 0 & warningLevel === 0) {
         if (totalCost >= criticalLevel) {
